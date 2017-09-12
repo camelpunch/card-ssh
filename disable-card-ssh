@@ -1,0 +1,10 @@
+#!/bin/bash
+
+echo "Killing ssh-agent and gpg-agent"
+killall ssh-agent gpg-agent
+
+echo "Unsetting env vars"
+unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
+
+echo "Starting new ssh-agent"
+eval "$(ssh-agent)"
