@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if gpg --card-status > /dev/null
+then
+    echo "Card is ready: killing ssh-agent and gpg-agent"
+    killall ssh-agent gpg-agent
+
+    echo "Unsetting env vars"
+    unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
+
+    echo "Starting new gpg-agent with SSH support"
+    eval "$(gpg-agent --daemon --enable-ssh-support)"
+else
+    echo "Card not ready"
+fi
