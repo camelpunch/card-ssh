@@ -1,5 +1,7 @@
 #!/bin/bash
 
+ttl=32400 # 9 hours
+
 if gpg --card-status > /dev/null
 then
     echo "Card is ready: killing ssh-agent and gpg-agent"
@@ -9,7 +11,7 @@ then
     unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
 
     echo "Starting new gpg-agent with SSH support"
-    eval "$(gpg-agent --daemon --enable-ssh-support)"
+    eval "$(gpg-agent --daemon --enable-ssh-support --max-cache-ttl $ttl --max-cache-ttl-ssh $ttl)"
 else
     echo "Card not ready"
 fi
