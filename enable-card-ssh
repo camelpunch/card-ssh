@@ -2,16 +2,11 @@
 
 ttl=32400 # 9 hours
 
-if gpg --card-status > /dev/null
-then
-    echo "Card is ready: killing ssh-agent and gpg-agent"
-    killall ssh-agent gpg-agent
+echo "Killing ssh-agent and gpg-agent"
+killall ssh-agent gpg-agent
 
-    echo "Unsetting env vars"
-    unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
+echo "Unsetting env vars"
+unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
 
-    echo "Starting new gpg-agent with SSH support"
-    eval "$(gpg-agent --daemon --enable-ssh-support --default-cache-ttl $ttl --default-cache-ttl-ssh $ttl)"
-else
-    echo "Card not ready"
-fi
+echo "Starting new gpg-agent with SSH support"
+eval "$(gpg-agent --daemon --enable-ssh-support --default-cache-ttl $ttl --default-cache-ttl-ssh $ttl)"
