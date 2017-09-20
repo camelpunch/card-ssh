@@ -6,11 +6,11 @@ then
   exit 1
 fi
 
-echo "Killing ssh-agent and gpg-agent"
-killall ssh-agent gpg-agent
+echo "Killing gpg-agent"
+killall gpg-agent
 
 echo "Unsetting env vars"
 unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
 
-echo "Starting new ssh-agent"
-eval "$(ssh-agent)"
+echo "Reinstating SSH_AUTH_SOCK from /tmp/previous_auth_sock"
+export SSH_AUTH_SOCK="$(cat /tmp/previous_auth_sock)"

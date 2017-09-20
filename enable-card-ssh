@@ -8,8 +8,11 @@ fi
 
 ttl=32400 # 9 hours
 
-echo "Killing ssh-agent and gpg-agent"
-killall ssh-agent gpg-agent
+echo "Killing gpg-agent"
+killall gpg-agent
+
+echo "Saving off previous SSH_AUTH_SOCK"
+echo $SSH_AUTH_SOCK > /tmp/previous_auth_sock
 
 echo "Unsetting env vars"
 unset GPG_AGENT_INFO SSH_AGENT_PID SSH_AUTH_SOCK
