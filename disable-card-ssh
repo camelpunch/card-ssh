@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $_ = $0 ]]
+then
+  echo "You must source this script!"
+  exit 1
+fi
+
 echo "Killing ssh-agent and gpg-agent"
 killall ssh-agent gpg-agent
 

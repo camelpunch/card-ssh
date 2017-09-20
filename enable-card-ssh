@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $_ = $0 ]]
+then
+  echo "You must source this script!"
+  exit 1
+fi
+
 ttl=32400 # 9 hours
 
 echo "Killing ssh-agent and gpg-agent"
