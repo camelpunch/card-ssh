@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ $_ = $0 ]]
+if [[ $_ = $0 || $SHLVL -gt 1 ]]
 then
   echo "You must source this script!"
   exit 1
